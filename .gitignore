@@ -4,3 +4,5 @@
 # Ignore MODULES
 __pycache__/
 *.py[cod]
+
+#fictitious
