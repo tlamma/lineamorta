@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+scp root@178.128.249.88:/var/www/html/lineamorta/* /home/lammatommaso/lineamorta/backup

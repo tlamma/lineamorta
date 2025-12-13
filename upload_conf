@@ -1,0 +1,2 @@
+#!/usr/bin/bash
+scp lineamorta.conf root@178.128.249.88:/etc/apache2/sites-available/
