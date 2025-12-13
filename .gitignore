@@ -1,0 +1,6 @@
+# Ignore VENV
+.lineamorta/
+
+# Ignore MODULES
+__pycache__/
+*.py[cod]
