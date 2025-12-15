@@ -5,4 +5,5 @@
 __pycache__/
 *.py[cod]
 
-#fictitious
+# Ignore credentials
+/script/credentials.json
