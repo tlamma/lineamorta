@@ -3,6 +3,17 @@
 $file = 'submissions.csv';
 $message = '';
 
+function fputcsv_all_quoted($handle, $fields, $delimiter = ',', $enclosure = '"') {
+    $escaped = array_map(function ($field) use ($enclosure) {
+        // Escape existing quotes by doubling them
+        $field = str_replace($enclosure, $enclosure . $enclosure, $field);
+        return $enclosure . $field . $enclosure;
+    }, $fields);
+
+    $line = implode($delimiter, $escaped) . "\n";
+    fwrite($handle, $line);
+}
+
 // ---------- Handle form submission ----------
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Sanitize input
@@ -24,13 +35,14 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         }
     }
 
+
     if ($isDuplicate) {
         $message = "Duplicate submission detected. You have already submitted this text.";
     } else {
         // Append to CSV
         $fp = fopen($file, 'a');
         if ($fp !== false) {
-            fputcsv($fp, [$theme, $pseudonym, $text_original, $text_english, $suggestions]);
+            fputcsv_all_quoted($fp, [$theme, $pseudonym, $text_original, $text_english, $suggestions]);
             fclose($fp);
             $message = "Thank you! Your submission has been saved.";
         } else {
